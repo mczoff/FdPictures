@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FdPictures", "FdPictures\FdPictures.csproj", "{68CCEACB-3CA3-4B9F-ADFF-6FC2F2923942}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FdPictures.Core", "FdPictures.Core\FdPictures.Core.csproj", "{03A2AA58-1364-4D98-95DB-70A18C2E211B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68CCEACB-3CA3-4B9F-ADFF-6FC2F2923942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68CCEACB-3CA3-4B9F-ADFF-6FC2F2923942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68CCEACB-3CA3-4B9F-ADFF-6FC2F2923942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68CCEACB-3CA3-4B9F-ADFF-6FC2F2923942}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03A2AA58-1364-4D98-95DB-70A18C2E211B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03A2AA58-1364-4D98-95DB-70A18C2E211B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03A2AA58-1364-4D98-95DB-70A18C2E211B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03A2AA58-1364-4D98-95DB-70A18C2E211B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E015BF2-5CFB-4EF8-83EE-191BA970247E}
+	EndGlobalSection
+EndGlobal

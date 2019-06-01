@@ -50,7 +50,7 @@
     <Compile Include="IFdPicturesContext.cs" />
     <Compile Include="Params\TransformParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\BitmapSplitService.cs" />
+    <Compile Include="Services\BitmapDiffService.cs" />
     <Compile Include="Utils\GlobalKeyboardHook.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

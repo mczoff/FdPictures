@@ -1,5 +1,8 @@
-﻿using FdPictures.Core.Helpers;
+﻿using FdPictures.Core;
+using FdPictures.Core.Helpers;
+using FdPictures.Core.Params;
 using FdPictures.Core.Utils;
+using FdPictures.Utils;
 using MvvmHelpers;
 using System;
 using System.Collections.Generic;
@@ -17,6 +20,9 @@ namespace FdPictures.ViewModels
     {
         private GlobalKeyboardHook _globalKeyboardHook;
         private ScreenshotMaker _screenshotMaker;
+
+        public Tuple<Point, Point> FirstRectangle { get; set; }
+        public Tuple<Point, Point> SecondRectangle { get; set; }
 
         public MainWindowViewModel()
         {
@@ -56,5 +62,19 @@ namespace FdPictures.ViewModels
                 e.Handled = true;
             }
         }
+
+        ICommand _scanCommand;
+        public ICommand ScanCommand
+            => _scanCommand ?? (_scanCommand = new RelayCommand(
+                _ =>
+                {
+                    IFdPicturesContext fdPicturesContext = new FdPicturesContext();
+
+                    fdPicturesContext.Transform(_sourceImage, new TransformParams
+                    {
+                        FirstRectangle = new Int32Rect((int)FirstRectangle.Item1.X, (int)FirstRectangle.Item1.Y, (int)(FirstRectangle.Item2.X - FirstRectangle.Item1.X), (int)(FirstRectangle.Item2.Y - FirstRectangle.Item1.Y)),
+                        SecondRectangle = new Int32Rect((int)SecondRectangle.Item1.X, (int)SecondRectangle.Item1.Y, (int)(SecondRectangle.Item2.X - SecondRectangle.Item1.X), (int)(SecondRectangle.Item2.Y - SecondRectangle.Item1.Y)),
+                    });
+                }));
     }
 }

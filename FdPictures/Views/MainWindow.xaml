@@ -14,26 +14,51 @@
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>
 
-    <Grid  
-        x:Name="theGrid"
-        MouseDown="Grid_MouseDown"
-        MouseUp="Grid_MouseUp"
-        MouseMove="Grid_MouseMove"
-        Background="Transparent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="369*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+        <Grid  
+            x:Name="theGrid"
+            MouseDown="Grid_MouseDown"
+            MouseUp="Grid_MouseUp"
+            MouseMove="Grid_MouseMove"
+            Background="Transparent">
 
-        <Image Source="{Binding SourceImage}"/>
+            <Image Stretch="Fill" Source="{Binding SourceImage}"/>
 
-        <Canvas>
-            <Rectangle
-                x:Name="selectionBox"
+            <Canvas>
+                <Rectangle
+                x:Name="selectionBox1"
                 Visibility="Collapsed"
                 Stroke="Green"
                 StrokeThickness="2"
                 StrokeDashArray="2,1"
                 />
-        </Canvas>
 
-        <tb:TaskbarIcon
+                <Rectangle
+                x:Name="selectionBox2"
+                Visibility="Collapsed"
+                Stroke="Red"
+                StrokeThickness="2"
+                StrokeDashArray="2,1"
+                />
+            </Canvas>
+
+            <tb:TaskbarIcon
           ToolTipText="hello world" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Command="{Binding ScanCommand}" Content="Scan" Margin="10" Grid.Column="2"/>
+        </Grid>
     </Grid>
 </Window>

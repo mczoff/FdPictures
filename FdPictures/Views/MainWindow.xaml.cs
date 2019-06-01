@@ -26,6 +26,10 @@ namespace FdPictures
         bool mouseDown = false; // Set to 'true' when mouse is held down.
         Point mouseDownPos; // The point where the mouse button was clicked down.
 
+        int stepNumber = 0;
+
+        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,19 +40,35 @@ namespace FdPictures
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            stepNumber++;
+
             // Capture and track the mouse.
             mouseDown = true;
             mouseDownPos = e.GetPosition(theGrid);
             theGrid.CaptureMouse();
 
-            // Initial placement of the drag selection box.         
-            Canvas.SetLeft(selectionBox, mouseDownPos.X);
-            Canvas.SetTop(selectionBox, mouseDownPos.Y);
-            selectionBox.Width = 0;
-            selectionBox.Height = 0;
+            if(stepNumber % 2 == 0)
+            {
+                // Initial placement of the drag selection box.         
+                Canvas.SetLeft(selectionBox1, mouseDownPos.X);
+                Canvas.SetTop(selectionBox1, mouseDownPos.Y);
+                selectionBox1.Width = 0;
+                selectionBox1.Height = 0;
 
-            // Make the drag selection box visible.
-            selectionBox.Visibility = Visibility.Visible;
+                // Make the drag selection box visible.
+                selectionBox1.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                // Initial placement of the drag selection box.         
+                Canvas.SetLeft(selectionBox2, mouseDownPos.X);
+                Canvas.SetTop(selectionBox2, mouseDownPos.Y);
+                selectionBox2.Width = 0;
+                selectionBox2.Height = 0;
+
+                // Make the drag selection box visible.
+                selectionBox2.Visibility = Visibility.Visible;
+            }
         }
 
         private void Grid_MouseUp(object sender, MouseButtonEventArgs e)
@@ -57,17 +77,16 @@ namespace FdPictures
             mouseDown = false;
             theGrid.ReleaseMouseCapture();
 
-            // Hide the drag selection box.
-            selectionBox.Visibility = Visibility.Collapsed;
-
             Point mouseUpPos = e.GetPosition(theGrid);
 
-            // TODO: 
-            //
-            // The mouse has been released, check to see if any of the items 
-            // in the other canvas are contained within mouseDownPos and 
-            // mouseUpPos, for any that are, select them!
-            //
+            if (stepNumber % 2 == 0)
+            {
+                (this.DataContext as MainWindowViewModel).FirstRectangle = Tuple.Create(mouseDownPos, mouseUpPos);
+            }
+            else
+            {
+                (this.DataContext as MainWindowViewModel).SecondRectangle = Tuple.Create(mouseDownPos, mouseUpPos);
+            }
         }
 
         private void Grid_MouseMove(object sender, MouseEventArgs e)
@@ -78,26 +97,53 @@ namespace FdPictures
 
                 Point mousePos = e.GetPosition(theGrid);
 
-                if (mouseDownPos.X < mousePos.X)
+                if (stepNumber % 2 == 0)
                 {
-                    Canvas.SetLeft(selectionBox, mouseDownPos.X);
-                    selectionBox.Width = mousePos.X - mouseDownPos.X;
-                }
-                else
-                {
-                    Canvas.SetLeft(selectionBox, mousePos.X);
-                    selectionBox.Width = mouseDownPos.X - mousePos.X;
-                }
+                    if (mouseDownPos.X < mousePos.X)
+                    {
+                        Canvas.SetLeft(selectionBox1, mouseDownPos.X);
+                        selectionBox1.Width = mousePos.X - mouseDownPos.X;
+                    }
+                    else
+                    {
+                        Canvas.SetLeft(selectionBox1, mousePos.X);
+                        selectionBox1.Width = mouseDownPos.X - mousePos.X;
+                    }
 
-                if (mouseDownPos.Y < mousePos.Y)
-                {
-                    Canvas.SetTop(selectionBox, mouseDownPos.Y);
-                    selectionBox.Height = mousePos.Y - mouseDownPos.Y;
+                    if (mouseDownPos.Y < mousePos.Y)
+                    {
+                        Canvas.SetTop(selectionBox1, mouseDownPos.Y);
+                        selectionBox1.Height = mousePos.Y - mouseDownPos.Y;
+                    }
+                    else
+                    {
+                        Canvas.SetTop(selectionBox1, mousePos.Y);
+                        selectionBox1.Height = mouseDownPos.Y - mousePos.Y;
+                    }
                 }
                 else
                 {
-                    Canvas.SetTop(selectionBox, mousePos.Y);
-                    selectionBox.Height = mouseDownPos.Y - mousePos.Y;
+                    if (mouseDownPos.X < mousePos.X)
+                    {
+                        Canvas.SetLeft(selectionBox2, mouseDownPos.X);
+                        selectionBox2.Width = mousePos.X - mouseDownPos.X;
+                    }
+                    else
+                    {
+                        Canvas.SetLeft(selectionBox2, mousePos.X);
+                        selectionBox2.Width = mouseDownPos.X - mousePos.X;
+                    }
+
+                    if (mouseDownPos.Y < mousePos.Y)
+                    {
+                        Canvas.SetTop(selectionBox2, mouseDownPos.Y);
+                        selectionBox2.Height = mousePos.Y - mouseDownPos.Y;
+                    }
+                    else
+                    {
+                        Canvas.SetTop(selectionBox2, mousePos.Y);
+                        selectionBox2.Height = mouseDownPos.Y - mousePos.Y;
+                    }
                 }
             }
         }
